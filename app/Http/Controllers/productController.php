@@ -12,16 +12,9 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Products::query();
-        $products->when(request('search'), function($query){
-            $query->where('title', 'like', '%'. request('search') . '%')
-                  ->orWhere('description', 'like', '%'. request('search') . '%');
-        }) -> when(request('min_price'), function($query){
-            $query->where('price', '>=', request('min_price'));
-        }) -> when(request('max_price'), function($query){
-            $query->where('price', '<=', request('max_price'));
-        });
-        return view('product.index', ['products' => $products->get()]);
+        $filters = request()->only(['search', 'min_price', 'max_price']);
+
+        return view('product.index', ['products' => Products::filter($filters)->get()]);
     }
 
     /**
