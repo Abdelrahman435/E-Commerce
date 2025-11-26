@@ -8,7 +8,7 @@ class ProductUpdateRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return true; // برضه الحماية على مستوى middleware
+        return true;
     }
 
     public function rules(): array
@@ -20,7 +20,6 @@ class ProductUpdateRequest extends FormRequest
             'stock'       => 'sometimes|integer|min:0',
             'category_id' => 'sometimes|nullable|exists:categories,id',
 
-            // لو بترفع صور جديدة للمنتج
             'images'      => 'sometimes|array',
             'images.*'    => 'image|mimes:jpg,jpeg,png,webp|max:2048',
         ];
@@ -34,5 +33,5 @@ class ProductUpdateRequest extends FormRequest
         ], 422)
     );
 }
-    
+
 }

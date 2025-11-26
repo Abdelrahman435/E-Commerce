@@ -8,7 +8,7 @@ class CommentRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return true; // السماح للجميع اللي عندهم auth
+        return true;
     }
 
     public function rules(): array
@@ -18,7 +18,6 @@ class CommentRequest extends FormRequest
         ];
     }
 
-    // Override عشان يرجع JSON بدل redirect
     protected function failedValidation(\Illuminate\Contracts\Validation\Validator $validator)
     {
         throw new \Illuminate\Validation\ValidationException($validator, response()->json([

@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Models\Product;     // ✔ الاسم الصحيح
+use App\Models\Product;
 use Illuminate\Support\Facades\Cache;
 
 class ProductService
@@ -12,7 +12,7 @@ class ProductService
         $cacheKey = 'products:' . md5(json_encode($request->query()));
 
         return Cache::remember($cacheKey, now()->addMinutes(10), function () use ($request) {
-            return Product::query()     // ✔ خليه Products
+            return Product::query()
                 ->when($request->name, fn($q) => $q->where('title', 'like', "%{$request->name}%"))
                 ->when($request->min_price, fn($q) => $q->where('price', '>=', $request->min_price))
                 ->when($request->max_price, fn($q) => $q->where('price', '<=', $request->max_price))
@@ -26,13 +26,13 @@ class ProductService
         return auth()->user()->products()->create($data);
     }
 
-    public function update(Product $product, array $data)   // ✔ Products مش Product
+    public function update(Product $product, array $data)
     {
         $product->update($data);
         return $product;
     }
 
-    public function delete(Product $product)     // ✔ Products
+    public function delete(Product $product)    
     {
         $product->delete();
         return true;

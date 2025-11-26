@@ -17,10 +17,8 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
-        // Fix MySQL old versions collation issue
         Schema::defaultStringLength(191);
 
-        // Force Laravel to use compatible collation
         Schema::defaultStringLength(191);
         Schema::defaultStringLength(191);
 

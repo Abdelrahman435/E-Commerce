@@ -8,7 +8,7 @@ class ProductStoreRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return true; // اسمح للجميع بالتخزين، والـ middleware مسؤول عن الحماية
+        return true;
     }
 
     public function rules(): array
@@ -20,7 +20,6 @@ class ProductStoreRequest extends FormRequest
             'stock'       => 'required|integer|min:0',
             'user_id' => 'nullable|exists:users,id',
 
-            // لو بترفع صور للمنتج
             'images'      => 'nullable|array',
             'images.*'    => 'image|mimes:jpg,jpeg,png,webp|max:2048',
         ];
