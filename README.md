@@ -46,7 +46,7 @@ REDIS_PORT=6379
 FILESYSTEM_DRIVER=public
 
 4. Generate key
-php artisan key:generate
+`php artisan key:generate`
 
 5. Run migrations
 php artisan migrate
