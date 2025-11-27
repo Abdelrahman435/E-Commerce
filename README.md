@@ -184,7 +184,6 @@ erDiagram
 
 ## Notes
 
-- Controllers are thin; business logic is inside Services.
 - Transformations applied so each product has:
   - `images`: array of full URLs
   - `comments`: array of objects `{ body, user_name }`
