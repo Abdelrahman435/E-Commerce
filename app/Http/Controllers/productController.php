@@ -20,9 +20,7 @@ class ProductController extends Controller
 
     public function index(Request $request)
     {
-        return response()->json(
-            $this->service->list($request)
-        );
+        return response()->json($this->service->list($request));
     }
 
     public function store(ProductStoreRequest $request)
@@ -48,6 +46,7 @@ class ProductController extends Controller
 
     public function show(Product $product)
     {
+        $product = $this->service->find($product->id);
         return response()->json($product);
     }
 }

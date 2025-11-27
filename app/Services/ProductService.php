@@ -4,45 +4,85 @@ namespace App\Services;
 
 use App\Models\Product;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage;
 
 class ProductService
 {
-    public function list($request)
+    protected function cacheKey($request)
     {
-        $cacheKey = 'products:' . md5(json_encode($request->query()));
+        return 'products:' . md5(json_encode($request->query()));
+    }
 
-        return Cache::tags(['products'])->remember($cacheKey, now()->addMinutes(10), function () use ($request) {
-            return Product::query()
-                ->when($request->title, fn($q) => $q->where('title', 'like', "%{$request->title}%"))
-                ->when($request->min_price, fn($q) => $q->where('price', '>=', $request->min_price))
-                ->when($request->max_price, fn($q) => $q->where('price', '<=', $request->max_price))
-                ->with('images')
-                ->paginate($request->get('per_page', 10));
-        });
+public function list($request)
+{
+    $cacheKey = $this->cacheKey($request);
+
+    return Cache::store('redis')->remember($cacheKey, 600, function () use ($request) {
+        $products = Product::query()
+            ->when($request->title, fn($q) => $q->where('title', 'like', "%{$request->title}%"))
+            ->when($request->min_price, fn($q) => $q->where('price', '>=', $request->min_price))
+            ->when($request->max_price, fn($q) => $q->where('price', '<=', $request->max_price))
+            ->with(['images', 'comments.user'])
+            ->paginate($request->get('per_page', 10));
+
+$products->getCollection()->transform(fn($product) => $this->transformProduct($product));
+
+        return $products;
+    });
+}
+
+    public function find($id)
+    {
+        $product = Product::with(['images', 'comments.user'])->findOrFail($id);
+
+        return $this->transformProduct($product);
     }
 
     public function create(array $data)
     {
-        Cache::tags(['products'])->flush();
-        return auth()->user()->products()->create($data);
+        $product = auth()->user()->products()->create($data);
+        $this->clearCache();
+        return $product;
     }
 
     public function update(Product $product, array $data)
     {
-        Cache::tags(['products'])->flush();
         $product->update($data);
+        $this->clearCache();
         return $product;
     }
 
     public function delete(Product $product)
     {
-        Cache::tags(['products'])->flush();
         $product->delete();
+        $this->clearCache();
         return true;
     }
-    public function find($id)
+
+    protected function clearCache()
+    {
+        $keys = Cache::store('redis')->keys('products:*');
+        foreach ($keys as $key) {
+            Cache::store('redis')->forget($key);
+        }
+    }
+
+protected function transformProduct($product)
 {
-    return Product::with(['images', 'comments'])->find($id);
+    return [
+        'id' => $product->id,
+        'title' => $product->title,
+        'description' => $product->description,
+        'price' => $product->price,
+        'stock' => $product->stock,
+        'created_at' => $product->created_at,
+        'updated_at' => $product->updated_at,
+        'images' => $product->images->map(fn($img) => asset('storage/' . $img->path))->toArray(),
+        'comments' => $product->comments->map(fn($c) => [
+            'body' => $c->body,
+            'user_name' => $c->user->name
+        ])->toArray(),
+    ];
 }
 
 }

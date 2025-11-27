@@ -9,6 +9,7 @@
         "laravel/framework": "^11.0",
         "laravel/tinker": "^2.9",
         "php-open-source-saver/jwt-auth": "^2.3",
+        "predis/predis": "^3.3",
         "spatie/flare-client-php": "^1.10",
         "spatie/laravel-permission": "^6.23"
     },
