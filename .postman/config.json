@@ -1,0 +1,16 @@
+{
+  "workspace": {
+    "id": "1cda253a-6747-4506-8ec3-3ee4f3e18422"
+  },
+  "entities": {
+    "collections": [
+      "..\\postman\\collections\\e-commerce(Auth).postman_collection.json",
+      "..\\postman\\collections\\e-commerce(Products).postman_collection.json",
+      "..\\postman\\collections\\e-commerce(Comments).postman_collection.json"
+    ],
+    "environments": [],
+    "specs": [],
+    "flows": [],
+    "globals": []
+  }
+}

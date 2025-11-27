@@ -1,0 +1,309 @@
+{
+  "info": {
+    "_postman_id": "fab14657-9e89-4139-8b43-55c4bd0d01b9",
+    "name": "e-commerce(Products)",
+    "description": "# 🚀 Get started here\n\nThis template guides you through CRUD operations (GET, POST, PUT, DELETE), variables, and tests.\n\n## 🔖 **How to use this template**\n\n#### **Step 1: Send requests**\n\nRESTful APIs allow you to perform CRUD operations using the POST, GET, PUT, and DELETE HTTP methods.\n\nThis collection contains each of these [request](https://learning.postman.com/docs/sending-requests/requests/) types. Open each request and click \"Send\" to see what happens.\n\n#### **Step 2: View responses**\n\nObserve the response tab for status code (200 OK), response time, and size.\n\n#### **Step 3: Send new Body data**\n\nUpdate or add new data in \"Body\" in the POST request. Typically, Body data is also used in PUT request.\n\n```\n{\n    \"name\": \"Add your name in the body\"\n}\n\n ```\n\n#### **Step 4: Update the variable**\n\nVariables enable you to store and reuse values in Postman. We have created a [variable](https://learning.postman.com/docs/sending-requests/variables/) called `base_url` with the sample request [https://postman-api-learner.glitch.me](https://postman-api-learner.glitch.me). Replace it with your API endpoint to customize this collection.\n\n#### **Step 5: Add tests in the \"Scripts\" tab**\n\nAdding tests to your requests can help you confirm that your API is working as expected. You can write test scripts in JavaScript and view the output in the \"Test Results\" tab.\n\n<img src=\"https://content.pstmn.io/fa30ea0a-373d-4545-a668-e7b283cca343/aW1hZ2UucG5n\" alt=\"\" height=\"1530\" width=\"2162\">\n\n## 💪 Pro tips\n\n- Use folders to group related requests and organize the collection.\n    \n- Add more [scripts](https://learning.postman.com/docs/writing-scripts/intro-to-scripts/) to verify if the API works as expected and execute workflows.\n    \n\n## 💡Related templates\n\n[API testing basics](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9a37a28-055b-49cd-8c7e-97494a21eb54&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[API documentation](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9c28f47-1253-44af-a2f3-20dce4da1f18&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[Authorization methods](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=31a9a6ed-4cdf-4ced-984c-d12c9aec1c27&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "43810235",
+    "_collection_link": "https://speeding-spaceship-216123.postman.co/workspace/1cda253a-6747-4506-8ec3-3ee4f3e18422/collection/43810235-fab14657-9e89-4139-8b43-55c4bd0d01b9?action=share&source=collection_link&creator=43810235"
+  },
+  "item": [
+    {
+      "name": "add products",
+      "id": "9c987e6b-f725-42dd-b373-24fd1d55d6b5",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3NjQxOTg0MzUsImV4cCI6MTc2NDIwMjAzNSwibmJmIjoxNzY0MTk4NDM1LCJqdGkiOiJBd0xzV1ZDWUY0Y2x3V2JMIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.5nQTbDFVmVi2LDC52d3BUX8IM6NQVhUhz6hL71XWWBE",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"title\": \"Laptop DELL\",\r\n  \"description\": \"Gaming laptop\",\r\n  \"price\": 2202,\r\n  \"stock\": 5\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8000/api/products",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "products"
+          ]
+        },
+        "description": "This endpoint adds a new product to the e-commerce system.\n\n**Request Body (all fields required):**\n- `title` (string): Name of the product\n- `description` (string): Description of the product\n- `price` (integer): Price of the product\n- `stock` (integer): Number of items in stock\n\n**Example payload:**\n```json\n{\n  \"title\": \"Laptop DELL\",\n  \"description\": \"Gaming laptop\",\n  \"price\": 2202,\n  \"stock\": 5\n}\n```\n\nAll fields are required. Make sure to provide valid values for each field."
+      },
+      "response": []
+    },
+    {
+      "name": "get products",
+      "id": "76a96588-41fb-47ab-8d23-d36475f4689d",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8000/api/products",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "products"
+          ],
+          "query": [
+            {
+              "key": "title",
+              "value": "Laptop DELL",
+              "disabled": true
+            },
+            {
+              "key": "min_price",
+              "value": "200",
+              "disabled": true
+            },
+            {
+              "key": "max_price",
+              "value": "3000",
+              "disabled": true
+            },
+            {
+              "key": "per_page",
+              "value": "8",
+              "disabled": true
+            }
+          ]
+        },
+        "description": "Retrieves a list of products from the e-commerce API.\n\n**Endpoint:** `GET /api/products`\n\n**Query Parameters:**\n- `title` (string): Filter products by title.\n- `min_price` (number): Minimum price to filter products.\n- `max_price` (number): Maximum price to filter products.\n- `per_page` (number): Number of products per page.\n\nThis request does not require a request body. Use the query parameters to refine your search results as needed."
+      },
+      "response": []
+    },
+    {
+      "name": "get product",
+      "id": "54bf8fde-c0d6-4213-ae8a-dfa1ee2cd350",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8000/api/products/2",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "products",
+            "2"
+          ]
+        },
+        "description": "Retrieves the details of a specific product by its ID using the GET method at the endpoint '/api/products/:id'. Provide the product ID in the URL to get information about that product."
+      },
+      "response": []
+    },
+    {
+      "name": "update product",
+      "id": "260f7afb-bf38-44cc-a3cc-d126ce7f4dc7",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2F1dGgvcmVnaXN0ZXIiLCJpYXQiOjE3NjQxOTMzMjQsImV4cCI6MTc2NDE5NjkyNCwibmJmIjoxNzY0MTkzMzI0LCJqdGkiOiI1c0FjbTJpbmVRWG8wcURuIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.C7gv8ysH8ekPDonMyPRhVB_Fo_AufXpvlIvCgDH33Ag",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"name\": \"HP Laptop Updated\",\r\n  \"description\": \"Updated description\",\r\n  \"price\": 27000\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8000/api/products/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "products",
+            "1"
+          ]
+        },
+        "description": "Updates an existing product by its ID. Expects a JSON body with updated product details such as name, description, and price."
+      },
+      "response": []
+    },
+    {
+      "name": "delete product",
+      "id": "e08007a7-0a7a-46eb-8414-28fba24e1793",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2F1dGgvcmVnaXN0ZXIiLCJpYXQiOjE3NjQxOTMzMjQsImV4cCI6MTc2NDE5NjkyNCwibmJmIjoxNzY0MTkzMzI0LCJqdGkiOiI1c0FjbTJpbmVRWG8wcURuIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.C7gv8ysH8ekPDonMyPRhVB_Fo_AufXpvlIvCgDH33Ag",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "DELETE",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"phoneNumber\": \"+201210201342\"\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8000/api/products/1",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "products",
+            "1"
+          ]
+        },
+        "description": "This DELETE endpoint removes a product by its ID. The request body must include the phone number of the user performing the deletion."
+      },
+      "response": []
+    },
+    {
+      "name": "Add images",
+      "id": "aeeb6916-424b-4c4b-885b-a2b7b56c3032",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwMDAvYXBpL2F1dGgvbG9naW4iLCJpYXQiOjE3NjQyMDI5NjEsImV4cCI6MTc2NDIwNjU2MSwibmJmIjoxNzY0MjAyOTYxLCJqdGkiOiJQbWxCemlLUXB3OHV3eU9aIiwic3ViIjoiMSIsInBydiI6IjIzYmQ1Yzg5NDlmNjAwYWRiMzllNzAxYzQwMDg3MmRiN2E1OTc2ZjcifQ.kybJGjO-0SnycXnklJUoxg7QrB3nM4FODAaWUbEN87c",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "images[]",
+              "type": "file",
+              "src": "/F:/photo/3b900a52-2db1-42f2-86dd-899b397184d5.jpg"
+            },
+            {
+              "key": "images[]",
+              "type": "file",
+              "src": "/F:/photo/IMG_20201224_142138.png.png"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://localhost:8000/api/products/2/images",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "products",
+            "2",
+            "images"
+          ]
+        },
+        "description": "This endpoint allows uploading one or more images for the product with ID 2. Use multipart/form-data with the key 'images\\[\\]' to attach the image files."
+      },
+      "response": []
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "id": "6def2647-673b-43df-8b7f-6e050f3087d5",
+      "key": "id",
+      "value": "1"
+    },
+    {
+      "id": "f32576be-fda6-4a3d-b2c3-9aae40947c99",
+      "key": "base_url",
+      "value": "https://postman-rest-api-learner.glitch.me/"
+    }
+  ]
+}
